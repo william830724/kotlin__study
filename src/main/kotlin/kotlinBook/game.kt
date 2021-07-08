@@ -2,9 +2,9 @@ package kotlinBook
 
 
     fun main (){
-        val options = arrayOf("Rock","Paper","Scissors")
+        val options = arrayOf("rock","paper","scissors")
         val gameChoice = getGameChoice(options)
-        val userChoice = getUserChoice(options)
+        val userChoice = getUserChoice(options).toLowerCase()
         printResult(userChoice,gameChoice)
     }
 
@@ -30,10 +30,10 @@ package kotlinBook
 
     fun printResult(userChoice: String,gameChoice: String){
         val result: String
-        if(userChoice == gameChoice) result = "Tie!"
-        else if ((userChoice =="Rock" && gameChoice == "Scissors") ||
-            (userChoice == "Paper" && gameChoice == "Rock") ||
-            (userChoice == "Scissors" && gameChoice == "Paper" ))
+        if(userChoice == gameChoice) result = "tie!"
+        else if ((userChoice =="rock" && gameChoice == "scissors") ||
+            (userChoice == "paper" && gameChoice == "rock") ||
+            (userChoice == "scissors" && gameChoice == "paper" ))
                 result = "You win!"
         else result = "You Lose! "
         println("You chouse $userChoice I chose $gameChoice. $result")

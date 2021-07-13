@@ -1,4 +1,4 @@
-
+import kotlinBook.Recipe
 
 //fun main(args:Array<String>){
 //    print("tset")
@@ -21,7 +21,7 @@ fun main(){
 //    }
 
     //if 運算式
-    println(if (x >y) "x is greater than y " else "x is not greater than y")
+//    println(if (x >y) "x is greater than y " else "x is not greater than y")
 
     //can get variable not set this data
     var z:String
@@ -45,7 +45,16 @@ fun main(){
     var x8:Int
     var x7:Long
 
-
+    var r1= Recipe("Tha","",false)
+    var r2 = r1.copy(isVegetraian = false)
+    //兩個箱等
+    var title = r2.component1();
+    var titleTest = r2.title
+    var r3 = Recipe("test r3","",false)
+    var (r3_title,r3_isVegetarian )= r3
+    println(r3_title) // test r3
+    println(r3_isVegetarian) //false
+    println(r1 === r2 ) // false (not same object)
 
 
 

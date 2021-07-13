@@ -3,10 +3,15 @@ package kotlinBook
 import java.awt.List
 import java.util.ArrayList
 
+//interface
+interface Roamable{
+    fun roam()
+}
+
 
 //animal >> canine + hippo >>  wolf
 //
-abstract class Animals {
+abstract class Animal : Roamable{
     //abstract constant
 //    open val image = ""
 //    open val food =""
@@ -28,7 +33,8 @@ abstract class Animals {
     abstract fun makeNoice()
     abstract fun eat()
 
-    open fun roam(){
+    //override interface function
+    override fun roam(){
         println("The Animal is roaming")
 
     }
@@ -37,7 +43,7 @@ abstract class Animals {
     }
 }
 
-class Hippo : Animals(){
+class Hippo : Animal(){
     override val image ="hippo.jpg"
     override val food: String = "grass"
     override val habitat: String = "water"
@@ -51,14 +57,18 @@ class Hippo : Animals(){
     }
 
     override fun eat(){
-        println("The HIippo is eating food")
+        println("The Hippo is eating food")
     }
+
+//    override fun sleep(){
+//        println("test")
+//    }
 
 }
 
 
 
-abstract class Canine() : Animals(){
+abstract class Canine() : Animal(){
     override fun roam() {
         super.roam()
         println("The Canine is roaming")
@@ -80,8 +90,14 @@ class Wolf :Canine(){
 
 }
 
+class Vehicle : Roamable{
+    override fun roam() {
+        println("The Vechicle is roaming")
+    }
+}
+
 class Vet{
-    fun getShot(animal: Animals){
+    fun getShot(animal: Animal){
         println("${animal.food} is his food")
         animal.makeNoice()
     }
@@ -99,7 +115,7 @@ fun main(){
 
 //    var animal:Animals = Wolf()
 
-    val animal: Animals = Wolf()
+    val animal: Animal = Wolf()
     animal.eat()
 
     val animals = arrayOf(Hippo(),Wolf())
@@ -114,10 +130,75 @@ fun main(){
     vet.getShot(wolf)
     vet.getShot(hippo)
 
+    //"is" example
+    val roamable = arrayOf(Hippo(),Wolf(),Vehicle())
+    for(item in roamable){
+        item.roam()
+
+        if(item is Animal){
+            item.eat()
+        }
+    }
+    if(roamable is Animal &&  roamable.hunger > 5){
+        // todo
+    }
+    if(roamable !is Animal || roamable.hunger >= 5){
+        // todo
+    }
+
+    //when >> java's switch
+    var x : Int = 0
+    when(x){
+        0 -> println("x is zero")
+        1,2 -> println("x is 1 or 2 ")
+        3,4 -> {
+            println("x is 3 or 4")
+        }
+        else -> println("")
+    }
+
+    var test :Animal = Wolf()
+    when(test){
+        is Wolf -> {
+            // to do something
+        }
+        is Hippo ->{
+            // to do something
+        }
+        is Animal ->{
+            // to do something
+        }
+    }
+
+    var r : Wolf = Wolf()
+    r.eat()
+    var r1 = r as Wolf
+    r1.eat()
+    if(r1 is Wolf){
+        //to do some
+    }
+
+    var roam :Roamable = Wolf()
+    var w1 = roam as Wolf
+    roam.eat()
+    w1.eat()
+
+    val roamables = arrayOf(Hippo(),Wolf(),Vehicle())
+    for (item in roamables){
+        item.roam()
+        if(item is Animal){
+            item.eat()
+        }
+    }
 
 
 
 }
+
+class myClass : Any(){
+    var myArray :Array<Any> = arrayOf(Wolf(),Hippo())
+}
+
 
 //open class test(name :String ,number :Int){
 //
